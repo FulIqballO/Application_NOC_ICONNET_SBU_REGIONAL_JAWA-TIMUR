@@ -37,6 +37,8 @@ public class ButtonsController(AppDbContext db) : ControllerBase
             ExtraSteps        = req.ExtraStepsJson,
             ExpiresAt         = DateTime.UtcNow.AddHours(req.ExpiresInHours),
             SortOrder         = req.SortOrder,
+            CreatedAt         = DateTime.UtcNow,   // ← tambahkan ini
+            UpdatedAt         = DateTime.UtcNow,   // ← tambahkan ini
         };
 
         db.Buttons.Add(btn);

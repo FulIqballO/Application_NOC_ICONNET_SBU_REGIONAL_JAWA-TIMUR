@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OltApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+933f38e2a5724265fc6e614f290eb1667d4a834f")]
 [assembly: System.Reflection.AssemblyProductAttribute("OltApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OltApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

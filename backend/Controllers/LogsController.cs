@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OltApi.Data;
 using OltApi.DTOs;
+using OltApi.Models;
 using OltApi.Services;
 
 namespace OltApi.Controllers;
@@ -10,7 +11,6 @@ namespace OltApi.Controllers;
 [ApiController, Route("api/logs"), Authorize]
 public class LogsController(AppDbContext db) : ControllerBase
 {
-    // ── GET /api/logs/my — log milik sendiri ──────────────────────────────────
     [HttpGet("my")]
     public async Task<IActionResult> MyLogs([FromQuery] int limit = 50)
     {
@@ -18,7 +18,6 @@ public class LogsController(AppDbContext db) : ControllerBase
         return Ok(await GetLogs(uid, null, Math.Min(limit, 200)));
     }
 
-    // ── GET /api/logs — semua log (admin only) ────────────────────────────────
     [HttpGet, Authorize(Roles = "admin")]
     public async Task<IActionResult> AllLogs(
         [FromQuery] int? userId,
@@ -26,7 +25,6 @@ public class LogsController(AppDbContext db) : ControllerBase
         [FromQuery] int  limit = 100)
         => Ok(await GetLogs(userId, deviceId, Math.Min(limit, 500)));
 
-    // ── GET /api/logs/today — aktivitas hari ini (admin only) ─────────────────
     [HttpGet("today"), Authorize(Roles = "admin")]
     public async Task<IActionResult> TodayActivity()
     {
@@ -39,11 +37,9 @@ public class LogsController(AppDbContext db) : ControllerBase
             .OrderByDescending(l => l.ExecutedAt)
             .Take(200)
             .ToListAsync();
-
         return Ok(logs.Select(MapLog));
     }
 
-    // ── Helper ────────────────────────────────────────────────────────────────
     async Task<List<LogResponse>> GetLogs(int? uid, int? devId, int limit)
     {
         var q = db.ActivityLogs

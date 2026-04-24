@@ -11,9 +11,7 @@ public class Button
     public string   Label               { get; set; } = "";
     public string?  Description         { get; set; }
     public string   CommandTemplate     { get; set; } = "";
-    // comma-separated: "port,onu_id"
     public string   ParameterKeys       { get; set; } = "";
-    // JSON extra steps khusus command ini
     public string?  ExtraSteps          { get; set; }
     public DateTime ExpiresAt           { get; set; }
     public bool     IsActive            { get; set; } = true;
