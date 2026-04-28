@@ -14,7 +14,7 @@ public class DevicesController(AppDbContext db) : ControllerBase
     public async Task<IActionResult> List() =>
         Ok(await db.Devices
             .Where(d => d.IsActive)
-            .OrderBy(d => d.Label) // ✅ FIX: pindah sebelum Select
+            .OrderBy(d => d.Label) 
             .Select(d => new DeviceResponse(
                 d.Id,
                 d.Name,

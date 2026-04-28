@@ -11,7 +11,7 @@ namespace OltApi.Controllers;
 [ApiController, Route("api/buttons"), Authorize]
 public class ButtonsController(AppDbContext db) : ControllerBase
 {
-    // ── POST /api/buttons — buat button (admin only) ──────────────────────────
+    //  POST /api/buttons — buat button (admin only) 
     [HttpPost, Authorize(Roles = "admin")]
     public async Task<IActionResult> Create(ButtonRequest req)
     {
@@ -37,8 +37,8 @@ public class ButtonsController(AppDbContext db) : ControllerBase
             ExtraSteps        = req.ExtraStepsJson,
             ExpiresAt         = DateTime.UtcNow.AddHours(req.ExpiresInHours),
             SortOrder         = req.SortOrder,
-            CreatedAt         = DateTime.UtcNow,   // ← tambahkan ini
-            UpdatedAt         = DateTime.UtcNow,   // ← tambahkan ini
+            CreatedAt         = DateTime.UtcNow,   
+            UpdatedAt         = DateTime.UtcNow,   
         };
 
         db.Buttons.Add(btn);
@@ -47,7 +47,7 @@ public class ButtonsController(AppDbContext db) : ControllerBase
         return Ok(MapButton(btn, device, user));
     }
 
-    // ── GET /api/buttons — semua button (admin only) ──────────────────────────
+    //  GET /api/buttons — semua button (admin only) 
     [HttpGet, Authorize(Roles = "admin")]
     public async Task<IActionResult> ListAll([FromQuery] int? userId, [FromQuery] int? deviceId)
     {
@@ -66,7 +66,7 @@ public class ButtonsController(AppDbContext db) : ControllerBase
         return Ok(result);
     }
 
-    // ── GET /api/buttons/my — button milik teknisi (aktif + belum expired) ────
+    //  GET /api/buttons/my — button milik teknisi (aktif + belum expired) 
     [HttpGet("my")]
     public async Task<IActionResult> ListMy([FromQuery] int? deviceId)
     {
@@ -100,7 +100,7 @@ public class ButtonsController(AppDbContext db) : ControllerBase
         }));
     }
 
-    // ── GET /api/buttons/{id} ─────────────────────────────────────────────────
+    //  GET /api/buttons/{id} 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
@@ -113,7 +113,7 @@ public class ButtonsController(AppDbContext db) : ControllerBase
         return Ok(MapButton(btn, btn.Device, btn.AssignedToUser));
     }
 
-    // ── PATCH /api/buttons/{id} (admin only) ──────────────────────────────────
+    //  PATCH /api/buttons/{id} (admin only) 
     [HttpPatch("{id}"), Authorize(Roles = "admin")]
     public async Task<IActionResult> Update(int id, ButtonRequest req)
     {
@@ -137,7 +137,7 @@ public class ButtonsController(AppDbContext db) : ControllerBase
         return Ok(MapButton(btn, btn.Device, btn.AssignedToUser));
     }
 
-    // ── DELETE /api/buttons/{id} (admin only) ─────────────────────────────────
+    //  DELETE /api/buttons/{id} (admin only) 
     [HttpDelete("{id}"), Authorize(Roles = "admin")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -148,7 +148,7 @@ public class ButtonsController(AppDbContext db) : ControllerBase
         return Ok();
     }
 
-    // ─── Helper ───────────────────────────────────────────────────────────────
+    //  Helper 
     static ButtonResponse MapButton(Button b, Device d, User u) => new(
         b.Id, b.DeviceId, d.Label, d.Name,
         b.AssignedToUserId, u.FullName,
