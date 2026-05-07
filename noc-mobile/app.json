@@ -17,13 +17,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1e3a5f"
       },
-      "package": "com.iconnet.noc.jatim",
-      "versionCode": 1
-    },
-    "extra": {
-      "eas": {
-        "projectId": "REPLACE_AFTER_EAS_INIT"
-      }
+      "package": "com.iconnet.noc.jatim"
     }
   }
 }
